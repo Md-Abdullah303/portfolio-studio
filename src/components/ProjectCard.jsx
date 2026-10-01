@@ -26,7 +26,7 @@ const ProjectCard = ({
       {/* Content Section */}
       <div className="flex flex-col flex-1 p-5 space-y-4">
         <div className="space-y-1.5">
-          <h2 className="text-lg font-semibold tracking-tight text-black group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+          <h2 className="text-lg font-semibold tracking-tight  group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
             {name}
           </h2>
           <p className="text-sm text-neutral-500  line-clamp-2 leading-relaxed">

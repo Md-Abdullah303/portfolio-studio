@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { GoPlus } from 'react-icons/go';
 
 const Navber = () => {
     return (
@@ -10,7 +11,7 @@ const Navber = () => {
                     href="/"
                     className="group flex items-center gap-3 focus:outline-none"
                 >
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-200 text-white dark:text-neutral-950 shadow-sm transition-transform duration-200 group-hover:scale-105">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-neutral-900  text-white shadow-sm transition-transform duration-200 ">
                         <svg
                             className="w-5 h-5 transition-transform duration-200 group-hover:rotate-6"
                             fill="none"
@@ -42,17 +43,11 @@ const Navber = () => {
                         href="/"
                         className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
                     >
-                        <svg
-                            className="w-4 h-4 transition-transform duration-200 group-hover:rotate-90"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <span>Add new project</span>
+                        <GoPlus className="text-lg" />
+                        <span>Add new Project</span>
                     </Link>
+                    <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/register`}>Register</Link>
+                    <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/login`}>Login</Link>
                 </div>
             </nav>
         </header>
