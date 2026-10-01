@@ -1,15 +1,7 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import ToastProvider from "@/components/ToastProvider";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -31,7 +23,10 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${poppins.variable}  h-full antialiased`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col">{children}</body>
+      <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <div>{children}</div>
+        <ToastProvider/>
+      </body>
     </html>
   );
 }

@@ -1,8 +1,17 @@
+import { session } from '@/lib/core/session';
 import Link from 'next/link';
 import React from 'react';
 import { GoPlus } from 'react-icons/go';
+import LogoutBtn from './LogoutBtn';
 
-const Navber = () => {
+const Navber = async () => {
+
+    const sessionData = await session()
+    const userData = sessionData?.user;
+    console.log(userData)
+
+
+
     return (
         <header className="w-full">
             <nav className="flex items-center justify-between px-6 py-4 rounded-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200/80 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md">
@@ -46,8 +55,18 @@ const Navber = () => {
                         <GoPlus className="text-lg" />
                         <span>Add new Project</span>
                     </Link>
-                    <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/register`}>Register</Link>
-                    <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/login`}>Login</Link>
+                    {
+                        userData ? (
+                            <>
+                                <LogoutBtn />
+                            </>
+                        ) : (
+                            <>
+                                <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/register`}>Register</Link>
+                                <Link className='text-sm text-white p-3 border border-white rounded-xl' href={`/login`}>Login</Link>
+                            </>
+                        )
+                    }
                 </div>
             </nav>
         </header>

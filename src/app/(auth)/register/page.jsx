@@ -3,8 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { GoPerson, GoMail, GoLock, GoEye, GoEyeClosed, GoArrowLeft } from 'react-icons/go';
+import { authClient } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,6 +19,8 @@ const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -23,11 +29,28 @@ const RegisterPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Register Form Data:', formData.name);
-        console.log('Register Form Data:', formData.email);
-        console.log('Register Form Data:', formData.password);
+        try {
+            const { data, error } = await authClient.signUp.email({
+                email: formData.email,
+                password: formData.password,
+                name: formData.name,
+                callbackURL: "/"
+            });
+            if (error) {
+                toast.error(error)
+                console.log(error);
+            } else {
+                toast.success("Registration successful")
+                router.push("/")
+                router.refresh("/")
+                console.log(data);
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
+        }
+
     };
 
     return (
