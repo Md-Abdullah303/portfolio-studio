@@ -15,3 +15,10 @@ export async function GET() {
     const projects = await AddProject.find()
     return NextResponse.json({ projects })
 }
+
+export async function DELETE(request) {
+    const id = request.nextUrl.searchParams.get("id")
+    await connectMongoDB()
+    await AddProject.findByIdAndDelete(id)
+    return NextResponse.json({ message: "Project Deleted" }, { status: 200 })
+}
