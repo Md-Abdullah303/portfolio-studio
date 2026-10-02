@@ -1,20 +1,21 @@
-import mongoose, {Schema} from "mongoose"
+import mongoose, { Schema } from "mongoose"
 
 
 const topicSchema = new Schema(
     {
-        title : String,
-        description : String,
-        image : String,
-        liveLink : String,
-        githubLink : String,
-        tags : [String],
-        challenges : String,
-        futureplans : String,
+        title: String,
+        description: String,
+        category: String,
+        imgLink: String,
+        liveLink: String,
+        githubLink: String,
+        tags: [String],
+        challenges: String,
+        futureplans: String,
     }
-    ,{ timestamps : true}
+    , { timestamps: true }
 )
 
-const Topic = mongoose.models.Topic || mongoose.model("Topic", topicSchema);
+const AddProject = mongoose.models.AddProject || mongoose.model("AddProject", topicSchema);
 
-export default Topic;
+export default AddProject;

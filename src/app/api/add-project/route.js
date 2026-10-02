@@ -1,10 +1,17 @@
 import connectMongoDB from "@/lib/mongodb";
-import Topic from "@/models/topic";
+import AddProject from "@/models/topic";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    const { title, description, image, liveLink, githubLink, tags, challenges, futureplans } = await request.json();
+    const { title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans } = await request.json();
     await connectMongoDB();
-    await Topic.create({ title, description, image, liveLink, githubLink, tags, challenges, futureplans });
-    return NextResponse.json({ message: "Topic Created" }, { status: 200 })
+    await AddProject.create({ title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans });
+    return NextResponse.json({ message: "New Project Added." }, { status: 200 })
+}
+
+
+export async function GET() {
+    await connectMongoDB();
+    const projects = await AddProject.find()
+    return NextResponse.json({ projects })
 }
