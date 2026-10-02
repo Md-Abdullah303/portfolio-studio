@@ -14,8 +14,11 @@ import {
     GoRepo,
     GoPencil
 } from 'react-icons/go';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const AddProjectForm = () => {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -38,10 +41,9 @@ const AddProjectForm = () => {
     };
 
     // ৩. ফর্ম সাবমিট হ্যান্ডলার (শুধুমাত্র ডাটা কনসোল করবে)
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // ট্যাগগুলোকে কমা দিয়ে আলাদা করে সুন্দর একটি array বানানো
         const formattedTags = formData.tags
             .split(',')
             .map((item) => item.trim())
@@ -52,8 +54,35 @@ const AddProjectForm = () => {
             tags: formattedTags, // অ্যারে আকারে ট্যাগ
         };
 
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/add-project`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    title: projectData.title,
+                    category: projectData.category,
+                    description: projectData.description,
+                    imgLink: projectData.imgLink,
+                    liveLink: projectData.liveLink,
+                    githubLink: projectData.githubLink,
+                    tags: projectData.tags,
+                    challenges: projectData.challenges,
+                    futureplans: projectData.futureplans,
+                })
+            })
 
-        console.log('Ready for Database / Payload:', projectData);
+            if (!res.ok) {
+                toast.error("Something was wrong!")
+            } else {
+                toast.success("Project added successfully!")
+                router.refresh("/all-projects")
+            }
+
+        } catch (error) {
+            toast.error("Something went wrong!")
+        }
 
     };
 
@@ -123,25 +152,16 @@ const AddProjectForm = () => {
                             <label htmlFor="category" className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
                                 Category <span className="text-rose-500">*</span>
                             </label>
-                            <div className="relative">
-                                <select
-                                    id="category"
-                                    name="category"
-                                    required
-                                    value={formData.category}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-300 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 transition-all bg-white cursor-pointer"
-                                >
-                                    <option value="" disabled>Select a category</option>
-                                    <option value="Full-Stack Application">Full-Stack Application</option>
-                                    <option value="Frontend Development">Frontend Development</option>
-                                    <option value="Backend & API">Backend & API</option>
-                                    <option value="Mobile App">Mobile App</option>
-                                    <option value="UI/UX Design">UI/UX Design</option>
-                                    <option value="AI & Machine Learning">AI & Machine Learning</option>
-                                    <option value="Open Source Tool">Open Source Tool</option>
-                                </select>
-                            </div>
+                            <input
+                                id="category"
+                                name="category"
+                                type="text"
+                                required
+                                value={formData.category}
+                                onChange={handleChange}
+                                placeholder="e.g. Portfolio Studio - Creator Platform"
+                                className="w-full px-4 py-2.5 rounded-xl border border-neutral-300 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 transition-all bg-white"
+                            />
                         </div>
 
                         {/* Tech Stack / Tags */}

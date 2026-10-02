@@ -2,7 +2,7 @@ import ProjectCard from "@/components/ProjectCard";
 import Image from "next/image";
 
 const allProjects = async () => {
-  const res = await fetch(`${process.env.NEXT_CLIENT}/api/add-project`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/add-project`, {
     cache: "no-store"
   })
 

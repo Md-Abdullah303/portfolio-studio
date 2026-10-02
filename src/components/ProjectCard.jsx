@@ -4,7 +4,7 @@ import { CiLocationArrow1 } from "react-icons/ci";
 import { MdModeEdit } from "react-icons/md";
 
 const ProjectCard = ({ project }) => {
-  console.log(project);
+  // console.log(project);
   return (
     <div className="group relative flex flex-col w-full  rounded-[4px] overflow-hidden bg-white  border border-neutral-200/80  transition-all duration-300 hover:-translate-y-1">
       {/* Image Preview Container */}
@@ -13,6 +13,7 @@ const ProjectCard = ({ project }) => {
           src={project?.imgLink}
           alt={project?.title}
           fill
+
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
