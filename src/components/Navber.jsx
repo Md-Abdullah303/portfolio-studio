@@ -8,7 +8,7 @@ const Navber = async () => {
 
     const sessionData = await session()
     const userData = sessionData?.user;
-    console.log(userData)
+    // console.log(userData)
 
 
 

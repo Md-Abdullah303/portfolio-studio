@@ -3,19 +3,15 @@ import React from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { MdModeEdit } from "react-icons/md";
 
-const ProjectCard = ({
-  name = "project-name",
-  img = "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-  description = "project-description",
-  id = 0,
-}) => {
+const ProjectCard = ({ project }) => {
+  console.log(project);
   return (
     <div className="group relative flex flex-col w-full  rounded-[4px] overflow-hidden bg-white  border border-neutral-200/80  transition-all duration-300 hover:-translate-y-1">
       {/* Image Preview Container */}
       <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
         <Image
-          src={img}
-          alt={name}
+          src={project?.imgLink}
+          alt={project?.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -27,10 +23,10 @@ const ProjectCard = ({
       <div className="flex flex-col flex-1 p-5 space-y-4">
         <div className="space-y-1.5">
           <h2 className="text-lg font-semibold tracking-tight  group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
-            {name}
+            {project?.title}
           </h2>
           <p className="text-sm text-neutral-500  line-clamp-2 leading-relaxed">
-            {description}
+            {project?.description}
           </p>
         </div>
 
