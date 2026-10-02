@@ -3,8 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { GoMail, GoLock, GoEye, GoEyeClosed, GoArrowLeft } from 'react-icons/go';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
+    const router = useRouter()
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -20,11 +25,29 @@ const LoginPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login Form Data:', formData);
-        console.log('Login Email:', formData.email);
-        console.log('Login Password:', formData.password);
+        // useing better auth
+
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email: formData.email,
+                password: formData.password,
+            })
+            if (error) {
+                toast.error("Invalid Credentials")
+
+            } else {
+                router.push("/")
+                router.refresh("/")
+                toast.success("Login Successfull")
+            }
+        } catch (error) {
+            throw new Error("Something went wrong")
+        }
+
+
+
     };
 
     return (
