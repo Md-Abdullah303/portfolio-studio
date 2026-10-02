@@ -49,7 +49,7 @@ const Navber = async () => {
                 {/* Right Action Button */}
                 <div className="flex items-center gap-3">
                     <Link
-                        href="/"
+                        href="/add-project"
                         className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
                     >
                         <GoPlus className="text-lg" />
