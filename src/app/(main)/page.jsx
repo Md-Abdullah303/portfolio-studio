@@ -1,21 +1,8 @@
 import ProjectCard from "@/components/ProjectCard";
+import { allProjects } from "@/lib/core/oneProject";
 import Image from "next/image";
 
-const allProjects = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/add-project`, {
-    cache: "no-store"
-  })
 
-  try {
-    if (!res.ok) {
-      throw new Error("Failed to fetch Projects")
-    }
-
-    return res.json()
-  } catch (error) {
-    console.log("Error loading Projects : ", error);
-  }
-}
 
 export default async function Home() {
 
@@ -31,7 +18,7 @@ export default async function Home() {
       <div className="grid grid-cols-3 gap-7">
         {/* akhane map kore amar all project dekhabo apadoto akta prject box deya disi */}
         {
-          projects?.projects?.map((project) => {
+          projects?.projects?.reverse().map((project) => {
             return <ProjectCard key={project._id} project={project} />
           })
         }

@@ -36,3 +36,18 @@ export async function GET(request, { params }) {
     const project = await AddProject.findById({ _id: id })
     return NextResponse.json({ project })
 }
+
+export async function PATCH(request, { params }) {
+    const { id } = await params;
+    const updatedData = await request.json()
+    await connectMongoDB()
+    await AddProject.findByIdAndUpdate(id, updatedData, { new: true })
+    return NextResponse.json({ message: "Project Updated" }, { status: 200 })
+}
+
+export async function DELETE(request, { params }) {
+    const { id } = await params;
+    await connectMongoDB()
+    await AddProject.findByIdAndDelete({ _id: id })
+    return NextResponse.json({ message: "Project Deleted" }, { status: 200 })
+}
