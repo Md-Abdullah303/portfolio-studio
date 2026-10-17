@@ -45,10 +45,10 @@ const Page = async ({ params }) => {
   // Format date nicely
   const formattedDate = project?.updatedAt
     ? new Date(project.updatedAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    })
     : 'Recently Updated';
 
   return (
@@ -155,7 +155,7 @@ const Page = async ({ params }) => {
         </div>
 
         {/* Project Image */}
-        <div className="relative w-full aspect-16/9 sm:aspect-21/9 bg-neutral-100 overflow-hidden">
+        <div className="relative w-full aspect-video sm:aspect-21/9 bg-neutral-100 overflow-hidden">
           <Image
             src={project?.imgLink || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d'}
             alt={project?.title || 'Project Preview'}
@@ -183,7 +183,7 @@ const Page = async ({ params }) => {
           </div>
 
           {/* Challenges Faced Section */}
-          <div className="bg-gradient-to-br from-amber-500/5 via-white to-transparent rounded-2xl p-6 sm:p-8 border border-amber-200/70 shadow-2xs space-y-4">
+          <div className="bg-linear-to-br from-amber-500/5 via-white to-transparent rounded-2xl p-6 sm:p-8 border border-amber-200/70 shadow-2xs space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
                 <GoIssueOpened className="text-lg" />
@@ -201,7 +201,7 @@ const Page = async ({ params }) => {
           </div>
 
           {/* Future Roadmap & Plans */}
-          <div className="bg-gradient-to-br from-blue-500/5 via-white to-transparent rounded-2xl p-6 sm:p-8 border border-blue-200/70 shadow-2xs space-y-4">
+          <div className="bg-linear-to-br from-blue-500/5 via-white to-transparent rounded-2xl p-6 sm:p-8 border border-blue-200/70 shadow-2xs space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center shrink-0">
                 <GoLightBulb className="text-lg" />
@@ -277,7 +277,7 @@ const Page = async ({ params }) => {
 
               <div className="pt-2 border-t border-neutral-100 flex items-center justify-between gap-3">
                 <span className="text-neutral-400 text-xs">Project ID</span>
-                <span className="font-mono text-[11px] text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md truncate max-w-[150px]">
+                <span className="font-mono text-[11px] text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md truncate max-w-37.5">
                   {project?._id}
                 </span>
               </div>
@@ -304,7 +304,7 @@ const Page = async ({ params }) => {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900">Live Website</p>
-                      <p className="text-[11px] text-neutral-500 truncate max-w-[160px]">
+                      <p className="text-[11px] text-neutral-500 truncate max-w-40">
                         {project.liveLink.replace(/^https?:\/\//, '')}
                       </p>
                     </div>
@@ -326,7 +326,7 @@ const Page = async ({ params }) => {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900">Source Code</p>
-                      <p className="text-[11px] text-neutral-500 truncate max-w-[160px]">
+                      <p className="text-[11px] text-neutral-500 truncate max-w-40">
                         {project.githubLink.replace(/^https?:\/\//, '')}
                       </p>
                     </div>
