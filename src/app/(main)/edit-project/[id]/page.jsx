@@ -5,7 +5,7 @@ import React from 'react';
 const Page = async ({ params }) => {
     const { id } = await params;
     const { project } = await getProjectById(id);
-    console.log(project);
+    // console.log(project);
     return (
         <div className="">
             <EditProjectForm project={project} />

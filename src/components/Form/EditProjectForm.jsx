@@ -20,27 +20,28 @@ import { useRouter } from 'next/navigation';
 const EditProjectForm = ({ project }) => {
     const router = useRouter()
     const [formData, setFormData] = useState({
-        title: project.title,
-        category: project.category,
-        description: project.description,
-        imgLink: project.imgLink,
-        liveLink: project.liveLink,
-        githubLink: project.githubLink,
+        title: project?.title || '',
+        category: project?.category || '',
+        description: project?.description || '',
+        imgLink: project?.imgLink || '',
+        liveLink: project?.liveLink || '',
+        githubLink: project?.githubLink || '',
         tags: Array.isArray(project?.tags) ? project.tags.join(', ') : (project?.tags || ''),
-        challenges: project.challenges,
-        futureplans: project.futureplans,
+        challenges: project?.challenges || '',
+        futureplans: project?.futureplans || '',
+        priority: project?.priority !== undefined && project?.priority !== null ? project.priority : '',
     });
 
-    // ২. প্রতিটি ইনপুট ফিল্ডের চেঞ্জ হ্যান্ডেল করার জন্য কমন ফাংশন
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value, // যে ইনপুটে টাইপ করা হচ্ছে তার name অনুযায়ী value আপডেট হবে
+            [name]: value,
         }));
     };
 
-    // ৩. ফর্ম সাবমিট হ্যান্ডলার (শুধুমাত্র ডাটা কনসোল করবে)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,6 +53,7 @@ const EditProjectForm = ({ project }) => {
         const projectData = {
             ...formData,
             tags: formattedTags, // অ্যারে আকারে ট্যাগ
+            priority: formData.priority !== '' ? Number(formData.priority) : 0,
         };
 
         try {
@@ -70,6 +72,7 @@ const EditProjectForm = ({ project }) => {
                     tags: projectData.tags,
                     challenges: projectData.challenges,
                     futureplans: projectData.futureplans,
+                    priority: projectData.priority,
                 })
             })
 
@@ -162,8 +165,25 @@ const EditProjectForm = ({ project }) => {
                             />
                         </div>
 
-                        {/* Tech Stack / Tags */}
+                        {/* Priority / Serial */}
                         <div>
+                            <label htmlFor="priority" className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
+                                Priority / Serial Number
+                            </label>
+                            <input
+                                id="priority"
+                                name="priority"
+                                type="number"
+                                value={formData.priority}
+                                onChange={handleChange}
+                                placeholder="e.g. 1 (Top priority), 2, 3..."
+                                className="w-full px-4 py-2.5 rounded-xl border border-neutral-300 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 transition-all bg-white"
+                            />
+                            <span className="text-[11px] text-neutral-400 mt-1 block">Enter number (e.g. 1 for top priority)</span>
+                        </div>
+
+                        {/* Tech Stack / Tags */}
+                        <div className="md:col-span-2">
                             <label htmlFor="tags" className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
                                 Tech Stack Tags <span className="text-rose-500">*</span>
                             </label>

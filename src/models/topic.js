@@ -12,6 +12,10 @@ const topicSchema = new Schema(
         tags: [String],
         challenges: String,
         futureplans: String,
+        priority: {
+            type: Number,
+            default: 0
+        },
     }
     , { timestamps: true }
 )

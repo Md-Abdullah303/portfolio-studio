@@ -14,6 +14,8 @@ export async function PUT(request, { params }) {
         newTags: tags,
         newChallenges: challenges,
         newFutureplans: futureplans,
+        newPriority: priority,
+        priority: directPriority,
     } = await request.json()
     await connectMongoDB()
     await AddProject.findByIdAndUpdate(id, {
@@ -26,6 +28,7 @@ export async function PUT(request, { params }) {
         tags,
         challenges,
         futureplans,
+        priority: priority ?? directPriority ?? 0,
     })
     return NextResponse.json({ message: "Project Updated" }, { status: 200 })
 }
