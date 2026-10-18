@@ -71,6 +71,50 @@ Take full control of how your portfolio showcases projects to recruiters and vis
 | **Feedback UI** | [React Hot Toast](https://react-hot-toast.com/) | Lightweight, animated toast notifications |
 | **Cloud Hosting** | [Vercel](https://vercel.com/) | Edge network global deployment |
 
+## 📂 Project Directory Structure
+
+```plaintext
+portfolio-studio/
+├── public/                 # Static visual assets
+├── src/
+│   ├── app/                # Next.js App Router (Layouts, Pages & APIs)
+│   │   ├── (auth)/         # Authentication routes (login, register)
+│   │   ├── (main)/         # Main authenticated dashboard & studio pages
+│   │   │   ├── add-project/        # Create new project showcase
+│   │   │   ├── edit-project/[id]/  # In-place project editor & priority manager
+│   │   │   ├── project-details/[id]# Deep-dive project overview
+│   │   │   └── page.jsx            # Main showcase gallery
+│   │   ├── api/            # Serverless REST endpoints
+│   │   │   ├── add-project/        # GET (sorted by priority), POST
+│   │   │   └── add-project/[id]/   # GET, PATCH, DELETE
+│   │   ├── globals.css     # Global theme & Tailwind tokens
+│   │   └── layout.js       # Root application layout & provider shell
+│   ├── components/         # Reusable UI components & forms
+│   │   ├── Form/           # Add & Edit project forms
+│   │   ├── Navigation/     # Sidebar & top navigation bars
+│   │   └── ProjectCard.jsx # Showcase card with priority badges
+│   ├── lib/                # Database connections, core fetchers & utilities
+│   │   ├── core/           # Data fetching functions (allProjects, getProjectById)
+│   │   └── mongodb.js      # Cached MongoDB connection client
+│   └── models/             # Mongoose schemas (AddProject schema)
+├── .env.example            # Environment variables blueprint
+└── package.json            # Project manifest & dependencies
+```
+
+---
+
+## 🔌 API Endpoints Reference
+
+The platform provides a clean, predictable RESTful API:
+
+| Method | Endpoint | Description | Query / Body Payload |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/add-project` | Fetch all projects **sorted ascending by priority** | None |
+| `POST` | `/api/add-project` | Create a new project showcase | `{ title, category, description, priority, ... }` |
+| `GET` | `/api/add-project/:id` | Fetch detailed data for a specific project | Route parameter `:id` |
+| `PATCH` | `/api/add-project/:id` | Update project details, links, or priority rank | Partial JSON payload of updated fields |
+| `DELETE` | `/api/add-project/:id` | Remove a project permanently | Route parameter `:id` |
+
 ---
 
 ## 🚀 Getting Started
