@@ -32,27 +32,44 @@
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- 🔐 **Secure Authentication**: User sign up, login, and protected sessions using **Better-Auth**.
-- 📁 **Project Management**: Add new projects with title, category, description, tags, preview images, and links.
-- 🎯 **Deep Insights**: Document development challenges and future plans for each project.
-- ⚡ **Full Stack Power**: Dynamic Server and Client Components using Next.js App Router and RESTful API endpoints.
-- 🎨 **Modern Minimalist UI**: Clean, aesthetic, responsive design crafted with Tailwind CSS and smooth micro-interactions.
-- 🔔 **Instant Feedback**: Interactive toast notifications with `react-hot-toast`.
+| Feature | Description |
+| :--- | :--- |
+| 🔢 **Custom Project Priority** | Rank top-priority projects on the fly (1, 2, 3...) with dynamic visual badge markers. |
+| 📁 **Full Lifecycle Project CMS** | Add, edit, and organize project showcases with descriptions, live URLs, GitHub repos, and tags. |
+| 🔐 **Modern Authentication** | Bulletproof user sign-up, session control, and protected routes powered by **Better-Auth**. |
+| 💡 **Challenges & Future Plans** | Dedicated spaces to articulate engineering obstacles faced and planned roadmap features. |
+| ⚡ **Lightning-Fast App Router** | Server Components and optimized Client Components in Next.js 16 with zero-lag routing. |
+| 🎨 **Responsive Dark/Light UI** | Crafted with Tailwind CSS v4, smooth hover elevations, and responsive grid layouts. |
+| 🔔 **Interactive Feedback** | Instant notifications via `react-hot-toast` for streamlined user interactions. |
 
 ---
 
-## 🛠️ Tech Stack
+## 🎯 Project Priority Engine
 
-- **Framework**: Next.js 16 (App Router)
-- **Library**: React 19
-- **Styling**: Tailwind CSS v4
-- **Database**: MongoDB & Mongoose
-- **Authentication**: Better-Auth
-- **Icons**: React Icons
-- **Notifications**: React Hot Toast
-- **Deployment**: Vercel
+Take full control of how your portfolio showcases projects to recruiters and visitors:
+
+- **Ascending Priority Ordering**: Projects are served in ascending sequence (`1` is the absolute top, followed by `2`, `3`...).
+- **Instant Backend Sorting**: The database automatically indexes and sorts all queries via `AddProject.find().sort({ priority: 1 })`.
+- **Live Visual Priority Badges**: Every prioritized project card clearly highlights its rank so you always know your showcase lineup.
+- **Effortless In-Place Reordering**: Need to change the lineup? Edit the project, update its priority number, and your portfolio updates immediately.
+
+---
+
+## 🛠️ Tech Stack Architecture
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | [Next.js 16](https://nextjs.org/) | React full-stack framework with App Router & Server Actions |
+| **UI Library** | [React 19](https://react.dev/) | Component architecture & concurrent rendering |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Utility-first, high-performance styling engine |
+| **Database** | [MongoDB Atlas](https://www.mongodb.com/) | Cloud NoSQL document database |
+| **ODM** | [Mongoose](https://mongoosejs.com/) | Schema validation and typed object data modeling |
+| **Authentication** | [Better-Auth](https://www.better-auth.com/) | Modern typescript-friendly authentication layer |
+| **Icons** | [React Icons](https://react-icons.github.io/react-icons/) | Feather, Octicons & Material design vector iconography |
+| **Feedback UI** | [React Hot Toast](https://react-hot-toast.com/) | Lightweight, animated toast notifications |
+| **Cloud Hosting** | [Vercel](https://vercel.com/) | Edge network global deployment |
 
 ---
 
