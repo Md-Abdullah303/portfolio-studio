@@ -3,9 +3,9 @@ import AddProject from "@/models/topic";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    const { title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans } = await request.json();
+    const { title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans, priority } = await request.json();
     await connectMongoDB();
-    await AddProject.create({ title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans });
+    await AddProject.create({ title, description, category, imgLink, liveLink, githubLink, tags, challenges, futureplans, priority: priority ? Number(priority) : 0 });
     return NextResponse.json({ message: "New Project Added." }, { status: 200 })
 }
 

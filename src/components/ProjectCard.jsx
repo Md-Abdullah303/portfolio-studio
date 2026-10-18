@@ -19,6 +19,15 @@ const ProjectCard = ({ project }) => {
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Priority Badge */}
+        {project?.priority !== undefined && project?.priority !== null && project?.priority !== "" && Number(project?.priority) > 0 && (
+          <div className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-neutral-900/85 backdrop-blur-md text-white border border-white/20 shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-neutral-300 text-[11px]">Priority:</span>
+            <span className="text-amber-300 font-bold">#{project.priority}</span>
+          </div>
+        )}
       </div>
 
       {/* Content Section */}

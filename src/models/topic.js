@@ -17,9 +17,13 @@ const topicSchema = new Schema(
             default: 0
         },
     }
-    , { timestamps: true }
+    , { timestamps: true, strict: false }
 )
 
-const AddProject = mongoose.models.AddProject || mongoose.model("AddProject", topicSchema);
+if (mongoose.models && mongoose.models.AddProject) {
+    delete mongoose.models.AddProject;
+}
+
+const AddProject = mongoose.model("AddProject", topicSchema);
 
 export default AddProject;
