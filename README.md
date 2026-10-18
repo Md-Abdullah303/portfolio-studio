@@ -119,46 +119,97 @@ The platform provides a clean, predictable RESTful API:
 
 ## 🚀 Getting Started
 
-Follow these simple steps to run the project locally:
+Follow these instructions to get a copy of the project running on your local machine for development and testing:
 
-### 1. Clone the repository
+### 📋 Prerequisites
+- **Node.js**: `v18.17.0` or higher
+- **Package Manager**: `npm`, `yarn`, or `pnpm`
+- **Database**: Active [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster connection URI
+
+---
+
+### 📥 Installation Steps
+
+#### 1. Clone the repository
 ```bash
 git clone https://github.com/Md-Abdullah303/portfolio-studio.git
 cd portfolio-studio
 ```
 
-### 2. Install dependencies
+#### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 3. Setup environment variables
-Create a `.env` file in the root directory and add your credentials:
+#### 3. Configure environment variables
+Create a `.env` file in the root directory:
+```bash
+cp .env.example .env
+```
+Populate your credentials into `.env`:
 ```env
-BETTER_AUTH_SECRET=your_secret_key
+# Authentication Configuration
+BETTER_AUTH_SECRET=your_super_secret_key_here
 BETTER_AUTH_URL=http://localhost:3000
 
-MONGODB_URI=your_mongodb_connection_uri
+# Database Configuration
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/?retryWrites=true&w=majority
 DB_name=portfolio-studio
 
+# App Domain
 NEXT_PUBLIC_URL=http://localhost:3000
 ```
 
-### 4. Run the development server
+#### 4. Run the development server
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app running.
+Visit [`http://localhost:3000`](http://localhost:3000) in your browser to start managing your projects!
 
 ---
 
-## 👨‍💻 Author
+## 🔐 Environment Variables Reference
 
-Developed with ❤️ by **[Md Abdullah](https://github.com/Md-Abdullah303)**
+| Variable | Required | Description | Example |
+| :--- | :---: | :--- | :--- |
+| `BETTER_AUTH_SECRET` | Yes | Cryptographic secret for signing tokens | `random_32_byte_string` |
+| `BETTER_AUTH_URL` | Yes | Absolute root URL for auth callbacks | `http://localhost:3000` |
+| `MONGODB_URI` | Yes | MongoDB Atlas connection string | `mongodb+srv://...` |
+| `DB_name` | Yes | Name of the database collection target | `portfolio-studio` |
+| `NEXT_PUBLIC_URL` | Yes | Base URL used by client-side data fetchers | `http://localhost:3000` |
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!  
+Feel free to check out the [issues page](https://github.com/Md-Abdullah303/portfolio-studio/issues).
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 👨‍💻 Author & Connect
+
+<div align="center">
+
+### **Md Abdullah**
+*Full-Stack Web Developer & Open Source Contributor*
+
+[![GitHub](https://img.shields.io/badge/GitHub-Md--Abdullah303-181717?style=flat-square&logo=github)](https://github.com/Md-Abdullah303)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit_Site-blue?style=flat-square&logo=google-chrome&logoColor=white)](https://portfolio-studio-roan-iota.vercel.app/)
+
+⭐ **If you find this project helpful or inspiring, please consider giving it a star on GitHub!** ⭐
+
+</div>
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+Distributed under the **MIT License**. See `LICENSE` for more information.
