@@ -12,7 +12,7 @@ export async function POST(request) {
 
 export async function GET() {
     await connectMongoDB();
-    const projects = await AddProject.find()
+    const projects = await AddProject.find().sort({ priority: 1 });
     return NextResponse.json({ projects })
 }
 
