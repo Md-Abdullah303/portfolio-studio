@@ -47,32 +47,44 @@ const ProjectCard = ({ project }) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="pt-2 mt-auto flex items-center gap-2">
+        <div className="pt-2 mt-auto flex items-center gap-1.5 sm:gap-2">
           {/* Primary Action: Live Link */}
-          <Link
-            href={project?.liveLink}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-150 active:scale-[0.98] cursor-pointer shadow-xs"
-          >
-            <CiLocationArrow1 className="text-base" />
-            <span>Live Link</span>
-          </Link>
+          {project?.liveLink ? (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[36px] rounded-lg text-[11px] sm:text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-150 active:scale-[0.97] cursor-pointer shadow-xs truncate"
+            >
+              <CiLocationArrow1 className="text-sm sm:text-base shrink-0" />
+              <span className="truncate">Live Demo</span>
+            </a>
+          ) : (
+            <span
+              className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[36px] rounded-lg text-[11px] sm:text-xs font-medium text-neutral-400 bg-neutral-100 cursor-not-allowed truncate"
+            >
+              <CiLocationArrow1 className="text-sm sm:text-base shrink-0" />
+              <span className="truncate">No Link</span>
+            </span>
+          )}
 
           {/* Secondary Action: Show Details */}
           <Link
             href={`/project-details/${project?._id}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-neutral-700 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200/80 transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[36px] rounded-lg text-[11px] sm:text-xs font-medium text-neutral-700 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200/80 transition-all duration-150 active:scale-[0.97] cursor-pointer truncate"
           >
-            <BiSolidCommentDetail className="text-base text-neutral-500" />
-            <span>Details</span>
+            <BiSolidCommentDetail className="text-sm sm:text-base text-neutral-500 shrink-0" />
+            <span className="truncate">Details</span>
           </Link>
 
           {/* Tertiary Action: Edit */}
           <Link
             href={`/edit-project/${project?._id}`}
-            className="inline-flex items-center justify-center gap-1 px-2.5 py-2 rounded-lg text-xs font-medium text-neutral-600 hover:text-neutral-900 bg-white hover:bg-neutral-50 border border-neutral-200 transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-2 min-h-[36px] rounded-lg text-[11px] sm:text-xs font-medium text-neutral-600 hover:text-neutral-900 bg-white hover:bg-neutral-50 border border-neutral-200 transition-all duration-150 active:scale-[0.97] cursor-pointer shrink-0"
+            title="Edit Project"
           >
-            <MdModeEdit className="text-base text-neutral-500" />
-            <span>Edit</span>
+            <MdModeEdit className="text-sm sm:text-base text-neutral-500 shrink-0" />
+            <span className="hidden xs:inline">Edit</span>
           </Link>
         </div>
       </div>
