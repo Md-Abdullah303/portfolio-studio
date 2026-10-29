@@ -16,8 +16,9 @@ const LogoutBtn = () => {
     }
     return (
         <button
+            type="button"
             onClick={handelLogoout}
-            className="w-full flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold text-red-500 hover:text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 border border-red-200 dark:border-red-900/40 rounded-xl transition-all duration-150 cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 min-h-[38px] text-xs font-semibold text-rose-400 hover:text-rose-300 bg-rose-950/20 hover:bg-rose-950/40 border border-rose-900/50 rounded-xl transition-all duration-150 active:scale-[0.98] cursor-pointer"
         >
             Logout
         </button>
