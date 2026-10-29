@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { GoPlus } from 'react-icons/go';
 import { IoIosHome } from 'react-icons/io';
 import { HiBars3, HiXMark } from 'react-icons/hi2';
@@ -9,6 +10,33 @@ import LogoutBtn from './LogoutBtn';
 
 const NavbarClient = ({ userData }) => {
     const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Auto-close mobile drawer when route changes
+    useEffect(() => {
+        setIsMobileOpen(false);
+    }, [pathname]);
+
+    // Handle ESC key and lock body scroll when mobile drawer is open
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setIsMobileOpen(false);
+            }
+        };
+
+        if (isMobileOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [isMobileOpen]);
 
     const navLink = [
         {
@@ -67,7 +95,7 @@ const NavbarClient = ({ userData }) => {
                     <button
                         type="button"
                         onClick={() => setIsMobileOpen((prev) => !prev)}
-                        className="flex items-center justify-center w-9 h-9 rounded-lg text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-700"
+                        className="flex items-center justify-center w-9 h-9 rounded-lg text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-700 cursor-pointer"
                         aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
                         aria-expanded={isMobileOpen}
                     >
@@ -80,7 +108,157 @@ const NavbarClient = ({ userData }) => {
                 </div>
             </header>
 
+            {/* Mobile Slide-over Drawer Backdrop */}
+            <div
+                className={`fixed inset-0 bg-black/70 backdrop-blur-xs z-40 transition-opacity duration-300 md:hidden ${
+                    isMobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+                onClick={() => setIsMobileOpen(false)}
+                aria-hidden="true"
+            />
+
+            {/* Mobile Slide-Over Drawer Panel */}
+            <aside
+                className={`fixed top-0 left-0 bottom-0 w-72 max-w-[85vw] bg-neutral-950 border-r border-neutral-800/90 z-50 flex flex-col justify-between p-5 transition-transform duration-300 ease-out md:hidden shadow-2xl ${
+                    isMobileOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile Navigation Drawer"
+            >
+                <div className="space-y-6">
+                    {/* Drawer Header: Logo + Close button */}
+                    <div className="flex items-center justify-between pb-3 border-b border-neutral-800/80">
+                        <Link
+                            href="/"
+                            onClick={() => setIsMobileOpen(false)}
+                            className="flex items-center gap-2.5 focus:outline-none"
+                        >
+                            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white text-neutral-900 shadow-sm">
+                                <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                                    />
+                                </svg>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                                <span className="text-base font-bold text-white">Portfolio</span>
+                                <span className="text-[9px] font-semibold uppercase px-1.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+                                    Studio
+                                </span>
+                            </div>
+                        </Link>
+
+                        <button
+                            type="button"
+                            onClick={() => setIsMobileOpen(false)}
+                            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
+                            aria-label="Close drawer"
+                        >
+                            <HiXMark className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    {/* Primary CTA */}
+                    <Link
+                        href="/add-project"
+                        onClick={() => setIsMobileOpen(false)}
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-neutral-900 bg-white hover:bg-neutral-100 shadow-sm transition-all duration-150 active:scale-[0.98]"
+                    >
+                        <GoPlus className="text-lg" />
+                        <span>Add new Project</span>
+                    </Link>
+
+                    {/* Mobile Navigation Links */}
+                    <div className="space-y-1">
+                        <p className="px-3 text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-2">
+                            Navigation
+                        </p>
+                        {navLink.map((link) => {
+                            const Icon = link.icon;
+                            const isActive = pathname === link.href;
+                            return (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsMobileOpen(false)}
+                                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                                        isActive
+                                            ? 'text-white bg-neutral-800 border border-neutral-700'
+                                            : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+                                    }`}
+                                >
+                                    <Icon className="text-lg" />
+                                    <span>{link.name}</span>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Bottom Section: Mobile User Profile & Auth */}
+                <div className="pt-4 border-t border-neutral-800">
+                    {userData ? (
+                        <div className="space-y-3">
+                            <div className="flex items-center gap-3 p-2 rounded-xl bg-neutral-900/60 border border-neutral-800">
+                                {userData?.image ? (
+                                    <img
+                                        src={userData.image}
+                                        alt={userData?.name || 'User'}
+                                        className="w-9 h-9 rounded-full object-cover border border-neutral-700"
+                                    />
+                                ) : (
+                                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 text-white flex items-center justify-center font-bold text-sm border border-neutral-700">
+                                        {userData?.name ? userData.name[0].toUpperCase() : 'U'}
+                                    </div>
+                                )}
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-semibold text-neutral-100 truncate">
+                                        {userData?.name || 'Studio Admin'}
+                                    </p>
+                                    <p className="text-xs text-neutral-400 truncate">
+                                        {userData?.email || ''}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="w-full">
+                                <LogoutBtn />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="space-y-2">
+                            <p className="text-xs text-neutral-400 px-1 mb-2">Account</p>
+                            <div className="flex items-center gap-2">
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMobileOpen(false)}
+                                    className="flex-1 py-2 text-center text-sm font-medium rounded-xl text-white bg-neutral-800 hover:bg-neutral-700 border border-neutral-700"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    href="/register"
+                                    onClick={() => setIsMobileOpen(false)}
+                                    className="flex-1 py-2 text-center text-sm font-medium rounded-xl text-neutral-900 bg-white hover:bg-neutral-100"
+                                >
+                                    Register
+                                </Link>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </aside>
+
             {/* Desktop Sidebar */}
+
 
             <aside className="hidden md:flex w-64 md:w-72 shrink-0 h-screen sticky top-0 bg-black backdrop-blur-xl border-r border-neutral-800 flex-col justify-between p-6 z-20">
                 {/* Top Section: Brand & Navigation */}
