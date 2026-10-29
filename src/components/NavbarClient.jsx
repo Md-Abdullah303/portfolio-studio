@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { GoPlus } from 'react-icons/go';
 import { IoIosHome } from 'react-icons/io';
+import { HiBars3, HiXMark } from 'react-icons/hi2';
 import LogoutBtn from './LogoutBtn';
 
 const NavbarClient = ({ userData }) => {
@@ -19,7 +20,68 @@ const NavbarClient = ({ userData }) => {
 
     return (
         <>
+            {/* Mobile Top Header Bar (Visible on mobile/tablet < md) */}
+            <header className="md:hidden sticky top-0 z-30 w-full bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800/80 px-4 py-3 flex items-center justify-between">
+                {/* Mobile Brand / Logo */}
+                <Link
+                    href="/"
+                    className="flex items-center gap-2.5 focus:outline-none"
+                >
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white text-neutral-900 shadow-sm">
+                        <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                            />
+                        </svg>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-base font-bold tracking-tight text-white">
+                            Portfolio
+                        </span>
+                        <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+                            Studio
+                        </span>
+                    </div>
+                </Link>
+
+                {/* Mobile Header Right Actions: Quick Add & Hamburger Toggle */}
+                <div className="flex items-center gap-2">
+                    <Link
+                        href="/add-project"
+                        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors"
+                        title="Add Project"
+                        aria-label="Add Project"
+                    >
+                        <GoPlus className="text-base" />
+                    </Link>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsMobileOpen((prev) => !prev)}
+                        className="flex items-center justify-center w-9 h-9 rounded-lg text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-700"
+                        aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
+                        aria-expanded={isMobileOpen}
+                    >
+                        {isMobileOpen ? (
+                            <HiXMark className="w-5 h-5 text-neutral-200" />
+                        ) : (
+                            <HiBars3 className="w-5 h-5 text-neutral-200" />
+                        )}
+                    </button>
+                </div>
+            </header>
+
             {/* Desktop Sidebar */}
+
             <aside className="hidden md:flex w-64 md:w-72 shrink-0 h-screen sticky top-0 bg-black backdrop-blur-xl border-r border-neutral-800 flex-col justify-between p-6 z-20">
                 {/* Top Section: Brand & Navigation */}
                 <div className="space-y-6">
