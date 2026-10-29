@@ -9,7 +9,7 @@ export default async function Home() {
   const projectCount = projectList.length;
 
   return (
-    <div className="mt-4 sm:mt-8 space-y-6 sm:space-y-8">
+    <div className="w-full mt-4 sm:mt-8 space-y-6 sm:space-y-8">
       {/* Header Section */}
       <div className="text-center space-y-2.5 sm:space-y-3 px-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs text-neutral-400">
@@ -45,7 +45,7 @@ export default async function Home() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7 max-w-7xl mx-auto px-1 sm:px-4">
           {projectList.map((project) => {
             return <ProjectCard key={project._id} project={project} />;
           })}
