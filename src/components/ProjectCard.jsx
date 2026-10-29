@@ -31,12 +31,17 @@ const ProjectCard = ({ project }) => {
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col flex-1 p-5 space-y-4">
-        <div className="space-y-1.5">
-          <h2 className="text-lg font-semibold tracking-tight text-neutral-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+      <div className="flex flex-col flex-1 p-4 sm:p-5 space-y-3 sm:space-y-4">
+        <div className="space-y-1 sm:space-y-1.5">
+          {project?.category && (
+            <span className="inline-block text-[10px] font-semibold uppercase tracking-wider text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded-md w-fit">
+              {project.category}
+            </span>
+          )}
+          <h2 className="text-base sm:text-lg font-semibold tracking-tight text-neutral-900 group-hover:text-neutral-700 transition-colors line-clamp-1">
             {project?.title}
           </h2>
-          <p className="text-sm text-neutral-500 line-clamp-2 leading-relaxed">
+          <p className="text-xs sm:text-sm text-neutral-500 line-clamp-2 leading-relaxed">
             {project?.description}
           </p>
         </div>
