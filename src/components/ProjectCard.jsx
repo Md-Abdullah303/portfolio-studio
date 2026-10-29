@@ -10,21 +10,21 @@ const ProjectCard = ({ project }) => {
   return (
     <div className="group relative flex flex-col w-full rounded-xl overflow-hidden bg-white border border-neutral-200/90 shadow-[0_2px_10px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
       {/* Image Preview Container */}
-      <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-neutral-100">
+      <div className="relative w-full aspect-16/10 sm:aspect-video overflow-hidden bg-neutral-100">
         <Image
           src={project?.imgLink || "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"}
           alt={project?.title || "Project Image"}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Priority Badge */}
         {project?.priority !== undefined && project?.priority !== null && project?.priority !== "" && Number(project?.priority) > 0 && (
-          <div className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-neutral-900/85 backdrop-blur-md text-white border border-white/20 shadow-md">
+          <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-neutral-900/90 backdrop-blur-md text-white border border-white/20 shadow-md">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-neutral-300 text-[11px]">Priority:</span>
+            <span className="text-neutral-300 text-[10px] sm:text-[11px]">Priority:</span>
             <span className="text-amber-300 font-bold">#{project.priority}</span>
           </div>
         )}
